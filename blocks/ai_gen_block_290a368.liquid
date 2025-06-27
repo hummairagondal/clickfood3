@@ -1,0 +1,442 @@
+{% doc %}
+  @prompt
+    collection list grid in circular shape and full width on home page, full width
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .circular-collections-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: {{ block.settings.section_padding }}px 0;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .circular-collections__inner-{{ ai_gen_id }} {
+    max-width: {{ block.settings.content_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .circular-collections__heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: {{ block.settings.heading_spacing }}px;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .circular-collections__grid-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: {{ block.settings.grid_gap }}px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .circular-collections__item-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    width: calc({{ 100 | divided_by: block.settings.columns_desktop }}% - {{ block.settings.grid_gap }}px);
+    max-width: {{ block.settings.circle_max_size }}px;
+    margin-bottom: {{ block.settings.grid_gap }}px;
+    transition: transform 0.3s ease;
+  }
+
+  .circular-collections__item-{{ ai_gen_id }}:hover {
+    transform: scale({{ block.settings.hover_scale }});
+  }
+
+  .circular-collections__link-{{ ai_gen_id }} {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+
+  .circular-collections__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* Creates a 1:1 aspect ratio */
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: {{ block.settings.placeholder_color }};
+    box-shadow: {{ block.settings.enable_shadow | default: false | ternary: '0 4px 20px rgba(0, 0, 0, 0.15)', 'none' }};
+  }
+
+  .circular-collections__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .circular-collections__item-{{ ai_gen_id }}:hover .circular-collections__image-{{ ai_gen_id }} {
+    transform: scale(1.1);
+  }
+
+  .circular-collections__overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.overlay_color }};
+    opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+  }
+
+  .circular-collections__item-{{ ai_gen_id }}:hover .circular-collections__overlay-{{ ai_gen_id }} {
+    opacity: {{ block.settings.overlay_opacity_hover | divided_by: 100.0 }};
+  }
+
+  .circular-collections__title-{{ ai_gen_id }} {
+    color: {{ block.settings.title_color }};
+    text-align: center;
+    padding: 0 10px;
+    margin: 0;
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: {{ block.settings.title_weight }};
+    z-index: 2;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .circular-collections__label-{{ ai_gen_id }} {
+    text-align: center;
+    margin-top: 12px;
+    color: {{ block.settings.label_color }};
+    font-size: {{ block.settings.label_size }}px;
+    font-weight: {{ block.settings.label_weight }};
+  }
+
+  .circular-collections__placeholder-{{ ai_gen_id }} svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: {{ block.settings.placeholder_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .circular-collections__item-{{ ai_gen_id }} {
+      width: calc({{ 100 | divided_by: block.settings.columns_mobile }}% - {{ block.settings.grid_gap }}px);
+    }
+
+    .circular-collections__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | minus: 4 }}px;
+    }
+
+    .circular-collections__label-{{ ai_gen_id }} {
+      font-size: {{ block.settings.label_size | minus: 2 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="circular-collections-{{ ai_gen_id }} page-width-{{ block.settings.full_width | default: true | ternary: 'full', 'contained' }}" {{ block.shopify_attributes }}>
+  <div class="circular-collections__inner-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="circular-collections__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="circular-collections__grid-{{ ai_gen_id }}">
+      {% for collection in block.settings.collection_list %}
+        <div class="circular-collections__item-{{ ai_gen_id }}">
+          <a href="{{ collection.url }}" class="circular-collections__link-{{ ai_gen_id }}">
+            <div class="circular-collections__image-wrapper-{{ ai_gen_id }}">
+              {% if collection.image %}
+                <img
+                  src="{{ collection.image | image_url: width: 500 }}"
+                  alt="{{ collection.title | escape }}"
+                  loading="lazy"
+                  width="500"
+                  height="500"
+                  class="circular-collections__image-{{ ai_gen_id }}"
+                >
+              {% else %}
+                <div class="circular-collections__placeholder-{{ ai_gen_id }}">
+                  {{ 'collection-apparel-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+              <div class="circular-collections__overlay-{{ ai_gen_id }}">
+                <h3 class="circular-collections__title-{{ ai_gen_id }}">{{ collection.title }}</h3>
+              </div>
+            </div>
+            {% if block.settings.show_collection_name %}
+              <div class="circular-collections__label-{{ ai_gen_id }}">{{ collection.title }}</div>
+            {% endif %}
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Circular Collections",
+  "tag": null,
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Collection"
+    },
+    {
+      "type": "collection_list",
+      "id": "collection_list",
+      "label": "Collections",
+      "limit": 12
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width section",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 800,
+      "max": 1600,
+      "step": 100,
+      "default": 1200,
+      "unit": "px",
+      "label": "Content max width"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4,
+      "label": "Columns on desktop"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px",
+      "label": "Space between circles"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 40,
+      "unit": "px",
+      "label": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "circle_max_size",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "default": 300,
+      "unit": "px",
+      "label": "Maximum circle size"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30,
+      "unit": "px",
+      "label": "Heading bottom spacing"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "default": 30,
+      "unit": "%",
+      "label": "Overlay opacity"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity_hover",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "default": 50,
+      "unit": "%",
+      "label": "Overlay opacity on hover"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Collection title color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "default": 18,
+      "unit": "px",
+      "label": "Title font size"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Title font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_name",
+      "label": "Show collection name below circle",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 14,
+      "unit": "px",
+      "label": "Label font size"
+    },
+    {
+      "type": "select",
+      "id": "label_weight",
+      "label": "Label font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Placeholder background color",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shadow",
+      "label": "Enable shadow effect",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "hover_scale",
+      "min": 1,
+      "max": 1.2,
+      "step": 0.1,
+      "default": 1.1,
+      "label": "Hover scale effect"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Circular Collections"
+    }
+  ]
+}
+{% endschema %}
