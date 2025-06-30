@@ -86,36 +86,6 @@
     },
     "marquee_6htnmp": {
       "type": "marquee",
-      "blocks": {
-        "text_EPRbpp": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We make things that work better and last longer.</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "center",
-            "type_preset": "h3",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "tight",
-            "letter_spacing": "tight",
-            "case": "none",
-            "wrap": "nowrap",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_EPRbpp"
-      ],
       "name": "t:names.marquee_section",
       "settings": {
         "movement_direction": "reverse",
