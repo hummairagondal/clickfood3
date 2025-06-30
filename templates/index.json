@@ -16,7 +16,7 @@
           "type": "ai_gen_block_c1945b9",
           "name": "Full Width Slideshow",
           "settings": {
-            "desktop_height": 600,
+            "desktop_height": 550,
             "mobile_height": 350,
             "autoplay": true,
             "autoplay_speed": 3,
