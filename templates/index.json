@@ -174,7 +174,7 @@
           "settings": {
             "banner_height": 600,
             "banner_height_mobile": 270,
-            "gap": 16,
+            "gap": 24,
             "border_radius": 8,
             "overlay_opacity": 0,
             "text_color": "#ffffff",
