@@ -93,79 +93,6 @@
         "gap_between_elements": 0
       }
     },
-    "section_NMTiC8": {
-      "type": "section",
-      "blocks": {
-        "ai_gen_block_c1945b9_cPbQzM": {
-          "type": "ai_gen_block_c1945b9",
-          "disabled": true,
-          "settings": {
-            "desktop_height": 500,
-            "mobile_height": 350,
-            "autoplay": true,
-            "autoplay_speed": 5,
-            "show_arrows": false,
-            "show_dots": true,
-            "text_alignment": "center",
-            "text_color": "#ffffff",
-            "button_color": "#000000",
-            "button_text_color": "#ffffff",
-            "button_hover_color": "#333333",
-            "dot_active_color": "#ffffff",
-            "button_border_radius": 0,
-            "slide_1_enabled": true,
-            "slide_1_desktop_image": "shopify://shop_images/full-shot-woman-shopping-market.jpg",
-            "slide_1_heading": "",
-            "slide_1_text": "",
-            "slide_1_button_text": "",
-            "slide_1_button_link": "",
-            "slide_2_enabled": false,
-            "slide_2_desktop_image": "shopify://shop_images/www.reallygreatsite.com_1.png",
-            "slide_2_heading": "",
-            "slide_2_text": "",
-            "slide_2_button_text": "",
-            "slide_2_button_link": "",
-            "slide_3_enabled": false,
-            "slide_3_heading": "",
-            "slide_3_text": "",
-            "slide_3_button_text": "",
-            "slide_3_button_link": ""
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_c1945b9_cPbQzM"
-      ],
-      "name": "t:names.custom_section",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "full-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
     "section_DqVKDV": {
       "type": "section",
       "blocks": {
@@ -231,7 +158,7 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 24,
+        "padding-block-start": 11,
         "padding-block-end": 0
       }
     },
@@ -394,7 +321,6 @@
   "order": [
     "section_qEeHA8",
     "marquee_6htnmp",
-    "section_NMTiC8",
     "section_DqVKDV",
     "section_yR4zat",
     "section_Pyz8bX"
